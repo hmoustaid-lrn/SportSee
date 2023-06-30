@@ -6,7 +6,7 @@ export default function Home() {
 
     return (
         <main>
-            <h2 class="tilte">Select USER</h2>
+            <h2 class="tilte">USERS:</h2>
             <NavLink to="profil/12">👦 Karl </NavLink>
             <NavLink to="profil/18">👩 Cecilia </NavLink>
         </main>
