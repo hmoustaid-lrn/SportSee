@@ -6,9 +6,9 @@ export default function Home() {
 
     return (
         <main>
-            <h2 class="tilte">USERS:</h2>
-            <NavLink to="profil/12">👦 Karl </NavLink>
-            <NavLink to="profil/18">👩 Cecilia </NavLink>
+            <h2 className="tilte">USERS:</h2>
+            <NavLink to="user/12">👦 Karl </NavLink>
+            <NavLink to="user/18">👩 Cecilia </NavLink>
         </main>
     );
 };

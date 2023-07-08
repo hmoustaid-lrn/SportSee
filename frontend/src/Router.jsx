@@ -13,7 +13,7 @@ function Router() {
                 <Sidebar />
                 <Routes>
                     <Route exact path="/" element={<Home />} />
-                    <Route exact path="/profil/:userId" />
+                    <Route exact path="/user/:userId" />
                 </Routes>
             </BrowserRouter>
         </React.StrictMode>

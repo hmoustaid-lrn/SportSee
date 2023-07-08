@@ -9,9 +9,9 @@ import "./index.css";
 export default function SideBar() {
 
     return (
-        <div class="container">
-            <div class="nav">
-                <div class="sports">
+        <div className="container">
+            <div className="nav">
+                <div className="sports">
                     <NavLink to="#">
                         <img src={yogaIcon} alt="Yoga" />
                     </NavLink>
@@ -25,7 +25,7 @@ export default function SideBar() {
                         <img src={dumbbell} alt="Dumbbell" />
                     </NavLink>
                 </div>
-                <div class="copyright">Copyright, SportSee 2023</div>
+                <div className="copyright">Copyright, SportSee 2023</div>
             </div>
         </div>
     );
