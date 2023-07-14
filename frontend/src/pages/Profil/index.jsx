@@ -6,6 +6,7 @@ import Card from '../../components/Card'
 import DailyChart from '../../components/DailyChart'
 import ChartsCard from '../../components/ChartsCard'
 import ChartAverageSessions from '../../components/ChartAverageSessions'
+import PerformanceChart from '../../components/PerformanceChart'
 
 
 import calories from '../../assets/calories-icon.svg'
@@ -59,6 +60,14 @@ export default function Profil() {
                                     />
                                 }
                             />
+                            <ChartsCard
+								className="performance"
+								content={
+									<PerformanceChart
+										data={userPerformance}
+									/>
+								}
+							/>
                         </div>
 
                     </div>

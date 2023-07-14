@@ -8,3 +8,8 @@
 .charts-card.average-sessions {
     background-color: #ff0000;
 }
+
+
+.charts-card.performance {
+    background-color: #282d30;
+}
