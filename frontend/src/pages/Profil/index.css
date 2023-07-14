@@ -1,0 +1,25 @@
+.profil {
+	width: 830px;
+	margin: auto;
+	padding-left: 10px;
+}
+.profil-title {
+    font-size: 3rem;
+    font-weight: 500;
+}
+.profil-firstName {
+    color: #ff0101;
+}
+.profil-subtitle {
+    margin: 0;
+    margin-top: 2.5625rem;
+    margin-bottom: 4.8125rem;
+    font-size: 1.125rem;
+}
+
+@media screen and (min-width: 1440px) {
+    .profil{
+        width: fit-content;
+        padding-left: 0;
+    }  
+}
