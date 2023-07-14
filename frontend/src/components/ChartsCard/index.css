@@ -13,3 +13,7 @@
 .charts-card.performance {
     background-color: #282d30;
 }
+
+.charts-card.score {
+    background-color: #fbfbfb;
+}
