@@ -1,0 +1,71 @@
+.card {
+	display: flex;
+	width: 12.125em;
+	margin-bottom: 2.4375em;
+	padding: 2em;
+	border-radius: 5px;
+	background: #fbfbfb;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
+	font-size: 0.75rem;
+}
+
+.card p {
+    margin: 0;
+}
+
+.card-icon {
+    width: 1.1875em;
+    height: 1.1875em;
+}
+
+.card-icon-wrapper {
+    position: relative;
+    width: 3.75em;
+    height: 3.75em;
+    margin-right: 1.5rem;
+    border-radius: 6px;
+}
+
+.card-data-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.card-title {
+    color: #282d30;
+    font-size: 1.25em;
+    font-weight: 700;
+    line-height: 1.5em;
+}
+.card-subtitle {
+    color: #74798c;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5rem;
+}
+
+
+.card-icon-wrapper.calorie {
+    background: rgba(255, 0, 0, 0.07);
+}
+.card-icon-wrapper.protein {
+    background: rgba(74, 184, 255, 0.1);
+}
+.card-icon-wrapper.carbohydrate {
+    background: rgba(249, 206, 35, 0.1);
+}
+.card-icon-wrapper.lipid {
+    background: rgba(253, 81, 129, 0.1);
+}
+
+
+
+@media screen and (min-width: 1440px){
+    .card {
+		font-size: 1rem;
+	}
+
+    .card:last-child {
+        margin-bottom: 0;
+    }
+}
