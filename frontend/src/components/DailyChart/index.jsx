@@ -1,6 +1,7 @@
 import {
     XAxis,
     BarChart,
+    Tooltip,
     CartesianGrid,
     YAxis,
     Bar,
@@ -8,6 +9,7 @@ import {
     ResponsiveContainer,
 } from 'recharts'
 
+import CustomToolTip from './CustomToolTip'
 
 
 import './index.css'
@@ -39,6 +41,10 @@ function DailyChart({ data }) {
                         tickCount={3}
                     />
                     <YAxis hide yAxisId="calories" />
+                    <Tooltip
+						content={<CustomToolTip />}
+						cursor={{ fill: 'rgba(196, 196, 196, 0.5)' }}
+					/>
                     <Bar
                         name="Poids (kg)"
                         dataKey="kilogram"
