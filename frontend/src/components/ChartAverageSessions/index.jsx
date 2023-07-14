@@ -13,17 +13,6 @@ import CustomToolTip from './CustomToolTip'
 import './index.css'
 
 function ChartAverageSessions({ data }) {
-	const formatLabel = (value) => {
-		if (value === 1) return 'L'
-		if (value === 2) return 'M'
-		if (value === 3) return 'M'
-		if (value === 4) return 'J'
-		if (value === 5) return 'V'
-		if (value === 6) return 'S'
-		if (value === 7) return 'D'
-		return value
-	}
-
 	return (
 		<>
 			<h3 className="chart-average-sessions-title">
@@ -52,7 +41,6 @@ function ChartAverageSessions({ data }) {
 							fill: 'rgba(255,255,255,0.6)',
 							fontSize: '0.75rem',
 						}}
-						tickFormatter={formatLabel}
 						tickMargin={20}
 					/>
                     <Tooltip content={<CustomToolTip />} cursor={false} />

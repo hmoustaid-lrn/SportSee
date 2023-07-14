@@ -11,14 +11,6 @@ import {
 function PerformanceChart({ data }) {
 
 	const renderPolarAngleAxis = ({ payload, x, y, cx, cy, ...rest }) => {
-		const formatLabel = (value) => {
-			if (value === 'Energy') return 'Energie'
-			if (value === 'Strength') return 'Force'
-			if (value === 'Speed') return 'Vitesse'
-			if (value === 'Intensity') return 'Intensité'
-			return value
-		}
-
 		return (
 			<Text
 				{...rest}
@@ -28,10 +20,7 @@ function PerformanceChart({ data }) {
 				fill="#FFFFFF"
 				fontSize="0.75rem"
 			>
-				{formatLabel(
-					data.kind[payload.value].charAt(0).toUpperCase() +
-						data.kind[payload.value].slice(1)
-				)}
+				{payload.value}
 			</Text>
 		)
 	}
@@ -39,7 +28,7 @@ function PerformanceChart({ data }) {
 	return (
 		<>
 			<ResponsiveContainer width="100%" height="100%">
-				<RadarChart outerRadius={90} data={[...data.data].reverse()}>
+				<RadarChart outerRadius={90} data={[...data].reverse()}>
 					<PolarGrid radialLines={false} />
 					<PolarAngleAxis
 						dataKey="kind"

@@ -9,6 +9,10 @@ import ChartAverageSessions from '../../components/ChartAverageSessions'
 import PerformanceChart from '../../components/PerformanceChart'
 import ScoreChart from '../../components/ScoreChart'
 
+import { useAxios } from '../../utils/hooks/useAxios'
+
+import { FormatData } from '../../utils/classes/FormatData.js'
+
 
 import calories from '../../assets/calories-icon.svg'
 import proteins from '../../assets/protein-icon.svg'
@@ -21,13 +25,41 @@ import './index.css';
 
 export default function Profil() {
 
-    const { userId } = useParams();
-    console.log(userId);
 
-    let userMainData = mocked_data.USER_MAIN_DATA.filter(item => item.id === parseInt(userId))[0];
-    let userActivity = mocked_data.USER_ACTIVITY.filter(item => item.userId === parseInt(userId))[0];
-    let userAverageSessions = mocked_data.USER_AVERAGE_SESSIONS.filter(item => item.userId === parseInt(userId))[0];
-    let userPerformance = mocked_data.USER_PERFORMANCE.filter(item => item.userId === parseInt(userId))[0];
+
+    const use_mocked_data = true
+
+    use_mocked_data ? console.log("Données mockées") : console.log("Données de l'api")
+
+    const { userId } = useParams();
+
+    const endpoints = [
+        `http://localhost:3000/user/${userId}`,
+        `http://localhost:3000/user/${userId}/average-sessions`,
+        `http://localhost:3000/user/${userId}/performance`,
+        `http://localhost:3000/user/${userId}/activity`,
+    ]
+
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const response = use_mocked_data ? mocked_data : useAxios(endpoints)
+
+
+    const filtered_data = {
+        USER_MAIN_DATA: response.USER_MAIN_DATA.filter((data) => data.id === parseInt(userId))[0],
+        USER_ACTIVITY: response.USER_ACTIVITY.filter((data) => data.userId === parseInt(userId))[0],
+        USER_AVERAGE_SESSIONS: response.USER_AVERAGE_SESSIONS.filter((data) => data.userId === parseInt(userId))[0],
+        USER_PERFORMANCE: response.USER_PERFORMANCE.filter((data) => data.userId === parseInt(userId))[0],
+    }
+
+    const formattedData = new FormatData(filtered_data)
+
+    const userMainData = formattedData.mainData
+    const userAverageSessions = formattedData.averageSessions
+    const userPerformance = formattedData.performance
+    const userActivity = formattedData.activity
+
+
 
     return (
         <section className="profil-wrapper">
@@ -56,27 +88,28 @@ export default function Profil() {
                                 content={
                                     <ChartAverageSessions
                                         data={
-                                            userAverageSessions.sessions
+                                            userAverageSessions
                                         }
                                     />
                                 }
                             />
+
                             <ChartsCard
-								className="performance"
-								content={
-									<PerformanceChart
-										data={userPerformance}
-									/>
-								}
-							/>
-                            <ChartsCard
-								className="score"
-								content={
-                                    <ScoreChart 
-                                        data={userMainData} 
+                                className="performance"
+                                content={
+                                    <PerformanceChart
+                                        data={userPerformance}
                                     />
                                 }
-							/>
+                            />
+                            <ChartsCard
+                                className="score"
+                                content={
+                                    <ScoreChart
+                                        data={userMainData}
+                                    />
+                                }
+                            />
                         </div>
 
                     </div>
