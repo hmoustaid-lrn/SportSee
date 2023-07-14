@@ -1,5 +1,3 @@
-import mocked_data from "../../data/data"
-
 import { useParams } from 'react-router-dom'
 
 import Card from '../../components/Card'
@@ -9,8 +7,6 @@ import ChartAverageSessions from '../../components/ChartAverageSessions'
 import PerformanceChart from '../../components/PerformanceChart'
 import ScoreChart from '../../components/ScoreChart'
 
-import { useAxios } from '../../utils/hooks/useAxios'
-
 import { FormatData } from '../../utils/classes/FormatData.js'
 
 
@@ -19,47 +15,33 @@ import proteins from '../../assets/protein-icon.svg'
 import carbs from '../../assets/carbs-icon.svg'
 import fat from '../../assets/fat-icon.svg'
 
+import { useState, useEffect } from "react";
 
+import { getReponse } from "../../utils/getResponse"
 
 import './index.css';
 
+
 export default function Profil() {
 
-
-
-    const use_mocked_data = true
-
-    use_mocked_data ? console.log("Données mockées") : console.log("Données de l'api")
+    const useMockedData = true
 
     const { userId } = useParams();
+    const [data, setData] = useState(null);
+    useEffect(() => {
+        const data = async () => {
+            const response = await getReponse(userId, useMockedData)
+            setData(response);
+        }
+        data();
+    }, []);
+    if (data === null) return null;
 
-    const endpoints = [
-        `http://localhost:3000/user/${userId}`,
-        `http://localhost:3000/user/${userId}/average-sessions`,
-        `http://localhost:3000/user/${userId}/performance`,
-        `http://localhost:3000/user/${userId}/activity`,
-    ]
-
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const response = use_mocked_data ? mocked_data : useAxios(endpoints)
-
-
-    const filtered_data = {
-        USER_MAIN_DATA: response.USER_MAIN_DATA.filter((data) => data.id === parseInt(userId))[0],
-        USER_ACTIVITY: response.USER_ACTIVITY.filter((data) => data.userId === parseInt(userId))[0],
-        USER_AVERAGE_SESSIONS: response.USER_AVERAGE_SESSIONS.filter((data) => data.userId === parseInt(userId))[0],
-        USER_PERFORMANCE: response.USER_PERFORMANCE.filter((data) => data.userId === parseInt(userId))[0],
-    }
-
-    const formattedData = new FormatData(filtered_data)
-
+    const formattedData = new FormatData(data)
     const userMainData = formattedData.mainData
     const userAverageSessions = formattedData.averageSessions
-    const userPerformance = formattedData.performance
     const userActivity = formattedData.activity
-
-
+    const userPerformance = formattedData.performance
 
     return (
         <section className="profil-wrapper">
@@ -78,9 +60,10 @@ export default function Profil() {
 
                         <div className="activity-charts">
                             <DailyChart
-                                data={userActivity.sessions}
+                                data={userActivity}
                             />
                         </div>
+
 
                         <div className="bottom-cards-wrapper">
                             <ChartsCard
@@ -94,6 +77,7 @@ export default function Profil() {
                                 }
                             />
 
+
                             <ChartsCard
                                 className="performance"
                                 content={
@@ -102,6 +86,7 @@ export default function Profil() {
                                     />
                                 }
                             />
+
                             <ChartsCard
                                 className="score"
                                 content={
@@ -145,7 +130,6 @@ export default function Profil() {
                     </div>
                 </div>
             </div>
-
         </section>
     )
 

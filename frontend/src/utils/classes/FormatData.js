@@ -2,7 +2,7 @@ export class FormatData {
     constructor(data) {
 
         this.mainData = {
-            userId: data.USER_MAIN_DATA.id,
+            userId: data.USER_MAIN_DATA?.id || data.USER_MAIN_DATA?.userId,
             userInfos: data.USER_MAIN_DATA.userInfos,
             todayScore: data.USER_MAIN_DATA.todayScore || data.USER_MAIN_DATA.score,
             keyData: data.USER_MAIN_DATA.keyData
