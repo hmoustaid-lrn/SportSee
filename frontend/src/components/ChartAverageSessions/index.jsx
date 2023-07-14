@@ -1,10 +1,13 @@
 import {
+    Tooltip, 
 	LineChart,
 	Line,
 	XAxis,
 	YAxis,
 	ResponsiveContainer,
 } from 'recharts'
+
+import CustomToolTip from './CustomToolTip'
 
 
 import './index.css'
@@ -52,6 +55,7 @@ function ChartAverageSessions({ data }) {
 						tickFormatter={formatLabel}
 						tickMargin={20}
 					/>
+                    <Tooltip content={<CustomToolTip />} cursor={false} />
 					<YAxis hide domain={['dataMin-10', 'dataMax+10']} />
 					<defs>
 						<linearGradient
