@@ -28,6 +28,14 @@
     order: 1;
 }
 
+
+.dashboard-charts-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    order: 2;
+}
+
 @media screen and (min-width: 1440px){
     .dashboard{
         flex-direction: row;
@@ -37,6 +45,10 @@
         width: fit-content;
         padding-left: 0;
     } 
+
+    .dashboard-charts-wrapper  {
+        order: 1;
+    }
 
     .dashboard-aside {
         display: block;

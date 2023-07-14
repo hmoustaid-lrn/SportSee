@@ -3,6 +3,7 @@ import mocked_data from "../../data/data"
 import { useParams } from 'react-router-dom'
 
 import Card from '../../components/Card'
+import DailyChart from '../../components/DailyChart'
 
 
 import calories from '../../assets/calories-icon.svg'
@@ -37,6 +38,13 @@ export default function Profil() {
                     Félicitation ! Vous avez explosé vos objectifs hier 👏
                 </p>
                 <div className="dashboard">
+                    <div className="dashboard-charts-wrapper">
+                        <div className="activity-charts">
+                            <DailyChart
+								data={userActivity.sessions}
+							/>
+						</div>
+                    </div>
                     <div className="dashboard-aside">
                         <Card
                             userKeyData={userMainData.keyData.calorieCount}
