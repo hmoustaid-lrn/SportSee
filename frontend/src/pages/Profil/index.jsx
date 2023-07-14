@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 
 import Card from '../../components/Card'
 import DailyChart from '../../components/DailyChart'
+import ChartsCard from '../../components/ChartsCard'
+import ChartAverageSessions from '../../components/ChartAverageSessions'
 
 
 import calories from '../../assets/calories-icon.svg'
@@ -39,11 +41,26 @@ export default function Profil() {
                 </p>
                 <div className="dashboard">
                     <div className="dashboard-charts-wrapper">
+
                         <div className="activity-charts">
                             <DailyChart
-								data={userActivity.sessions}
-							/>
-						</div>
+                                data={userActivity.sessions}
+                            />
+                        </div>
+
+                        <div className="bottom-cards-wrapper">
+                            <ChartsCard
+                                className="average-sessions"
+                                content={
+                                    <ChartAverageSessions
+                                        data={
+                                            userAverageSessions.sessions
+                                        }
+                                    />
+                                }
+                            />
+                        </div>
+
                     </div>
                     <div className="dashboard-aside">
                         <Card

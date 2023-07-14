@@ -1,0 +1,19 @@
+.average-sessions {
+	position: relative;
+	
+}
+
+.average-sessions .recharts-text {
+    font-weight: 500;
+}
+
+.chart-average-sessions-title{
+	position: absolute;
+	top: 1.8125rem;
+	left: 2.125rem;
+	color: #fff;
+	font-size: 0.9375rem;
+	font-weight: 500;
+	opacity: 0.6;
+
+}

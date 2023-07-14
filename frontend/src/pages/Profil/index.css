@@ -36,6 +36,12 @@
     order: 2;
 }
 
+.bottom-cards-wrapper{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2rem;
+}
+
 @media screen and (min-width: 1440px){
     .dashboard{
         flex-direction: row;
@@ -55,4 +61,9 @@
         order: 2;
         margin-left: 1.9375rem;
     }
+
+
+    .bottom-cards-wrapper  {
+		margin-bottom: 0;
+	}
 }
