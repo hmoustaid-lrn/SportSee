@@ -1,6 +1,6 @@
 ## Installation
 
-1. Clone the repository: `https://github.com/hmoustaid-lrn/SportSee`
+1. Clone the repository: `git clone https://github.com/hmoustaid-lrn/SportSee`
 2. Navigate to the "backend" folder and install all the dependencies: `npm install`
 3. Start the backend server: `npm run dev`
 4. Navigate to the "frontend" folder and install all the dependencies: `npm install`
