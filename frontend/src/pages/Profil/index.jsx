@@ -24,7 +24,12 @@ import './index.css';
 
 export default function Profil() {
 
-    const useMockedData = true
+    let useMockedData = true
+    console.log(process.env.REACT_APP_MOCKED)
+
+    if (process.env.REACT_APP_MOCKED === 'no') {
+        useMockedData = false
+    }
 
     const { userId } = useParams();
     const [data, setData] = useState(null);
