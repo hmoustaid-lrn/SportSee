@@ -4,7 +4,13 @@ import { useAxios } from '../utils/hooks/useAxios'
 import { FormatData } from '../utils/classes/FormatData.js'
 
 
-export const getReponse = async (userId, useMockedData) => {
+export const getResponse = async (userId) => {
+
+    let useMockedData = true
+
+    if (process.env.REACT_APP_MOCKED === 'no') {
+        useMockedData = false
+    }
 
     useMockedData? console.log("Mocked Data Used"):console.log("API Data Used")
     
@@ -24,9 +30,10 @@ export const getReponse = async (userId, useMockedData) => {
         USER_PERFORMANCE: mocked_data.USER_PERFORMANCE.filter((data) => data.userId === parseInt(userId))[0],
     }
 
-
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const response = useMockedData? filtered_mocked_data : useAxios(endpoints)
+    const response = useMockedData? filtered_mocked_data : await useAxios(endpoints)
 
-    return response 
+    const formattedData = new FormatData(response)
+  
+    return formattedData 
 };

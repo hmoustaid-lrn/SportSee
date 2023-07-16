@@ -7,8 +7,6 @@ import ChartAverageSessions from '../../components/ChartAverageSessions'
 import PerformanceChart from '../../components/PerformanceChart'
 import ScoreChart from '../../components/ScoreChart'
 
-import { FormatData } from '../../utils/classes/FormatData.js'
-
 
 import calories from '../../assets/calories-icon.svg'
 import proteins from '../../assets/protein-icon.svg'
@@ -17,36 +15,23 @@ import fat from '../../assets/fat-icon.svg'
 
 import { useState, useEffect } from "react";
 
-import { getReponse } from "../../utils/getResponse"
+import { getResponse } from "../../utils/getResponse"
 
 import './index.css';
 
 
 export default function Profil() {
 
-    let useMockedData = true
-    console.log(process.env.REACT_APP_MOCKED)
-
-    if (process.env.REACT_APP_MOCKED === 'no') {
-        useMockedData = false
-    }
-
     const { userId } = useParams();
-    const [data, setData] = useState(null);
+    const [formattedData, setFormattedData] = useState(null);
     useEffect(() => {
         const data = async () => {
-            const response = await getReponse(userId, useMockedData)
-            setData(response);
+            const response = await getResponse(userId)
+            setFormattedData(response);
         }
         data();
     }, []);
-    if (data === null) return null;
-
-    const formattedData = new FormatData(data)
-    const userMainData = formattedData.mainData
-    const userAverageSessions = formattedData.averageSessions
-    const userActivity = formattedData.activity
-    const userPerformance = formattedData.performance
+    if (formattedData === null) return null;
 
     return (
         <section className="profil-wrapper">
@@ -54,7 +39,7 @@ export default function Profil() {
                 <h2 className="profil-title">
                     Bonjour{' '}
                     <span className="profil-firstName">
-                        {userMainData.userInfos.firstName}
+                        {formattedData.mainData.userInfos.firstName}
                     </span>
                 </h2>
                 <p className="profil-subtitle">
@@ -65,7 +50,7 @@ export default function Profil() {
 
                         <div className="activity-charts">
                             <DailyChart
-                                data={userActivity}
+                                data={formattedData.activity}
                             />
                         </div>
 
@@ -76,7 +61,7 @@ export default function Profil() {
                                 content={
                                     <ChartAverageSessions
                                         data={
-                                            userAverageSessions
+                                            formattedData.averageSessions
                                         }
                                     />
                                 }
@@ -87,7 +72,7 @@ export default function Profil() {
                                 className="performance"
                                 content={
                                     <PerformanceChart
-                                        data={userPerformance}
+                                        data={formattedData.performance}
                                     />
                                 }
                             />
@@ -96,7 +81,7 @@ export default function Profil() {
                                 className="score"
                                 content={
                                     <ScoreChart
-                                        data={userMainData}
+                                        data={formattedData.mainData}
                                     />
                                 }
                             />
@@ -105,28 +90,28 @@ export default function Profil() {
                     </div>
                     <div className="dashboard-aside">
                         <Card
-                            userKeyData={userMainData.keyData.calorieCount}
+                            userKeyData={formattedData.mainData.keyData.calorieCount}
                             unit="kCal"
                             subtitle="Calories"
                             className="calorie"
                             logo={calories}
                         />
                         <Card
-                            userKeyData={userMainData.keyData.proteinCount}
+                            userKeyData={formattedData.mainData.keyData.proteinCount}
                             unit="g"
                             subtitle="Proteines"
                             className="protein"
                             logo={proteins}
                         />
                         <Card
-                            userKeyData={userMainData.keyData.carbohydrateCount}
+                            userKeyData={formattedData.mainData.keyData.carbohydrateCount}
                             unit="g"
                             subtitle="Glucides"
                             className="carbohydrate"
                             logo={carbs}
                         />
                         <Card
-                            userKeyData={userMainData.keyData.lipidCount}
+                            userKeyData={formattedData.mainData.keyData.lipidCount}
                             unit="g"
                             subtitle="Lipides"
                             className="lipid"
