@@ -30,10 +30,16 @@ export const getResponse = async (userId) => {
         USER_PERFORMANCE: mocked_data.USER_PERFORMANCE.filter((data) => data.userId === parseInt(userId))[0],
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const response = useMockedData? filtered_mocked_data : await useAxios(endpoints)
-
-    const formattedData = new FormatData(response)
+    let response, formattedData
+    let errorAPI = false
+    try{
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        response = useMockedData? filtered_mocked_data : await useAxios(endpoints)
+        formattedData = new FormatData(response)
+    }catch(err){
+        errorAPI = true
+    }
+    
   
-    return formattedData 
+    return {formattedData, errorAPI} 
 };

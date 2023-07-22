@@ -23,15 +23,26 @@ import './index.css';
 export default function Profil() {
 
     const { userId } = useParams();
+    const [errorAPI, setErrorAPI] = useState(false)
+
     const [formattedData, setFormattedData] = useState(null);
     useEffect(() => {
         const data = async () => {
             const response = await getResponse(userId)
-            setFormattedData(response);
+            setFormattedData(response.formattedData);
+            setErrorAPI(response.errorAPI)
         }
         data();
     }, []);
     if (formattedData === null) return null;
+
+    if(errorAPI){
+        return (
+			<section className="profil-wrapper">
+				<h2 className="center error-message">Une erreur est survenue. Veuillez réessayer ultérieurement </h2>
+			</section>
+		)
+    }
 
     return (
         <section className="profil-wrapper">

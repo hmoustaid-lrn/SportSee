@@ -42,6 +42,10 @@
 	margin-bottom: 2rem;
 }
 
+.error-message {
+    color: #ff0101;
+}
+
 @media screen and (min-width: 1440px){
     .dashboard{
         flex-direction: row;
