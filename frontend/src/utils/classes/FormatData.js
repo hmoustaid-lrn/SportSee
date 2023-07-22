@@ -9,7 +9,7 @@ export class FormatData {
         }
 
         this.activity = data.USER_ACTIVITY.sessions.map(session => ({
-            day: session.day.toString().slice(-1),
+            day: session.day,
             kilogram: session.kilogram,
             calories: session.calories,
         }))
